@@ -80,7 +80,7 @@ export default function Navbar() {
           <div className="leading-tight">
             <p
               className={`font-display font-semibold tracking-wide transition-all duration-300 ${
-              scrolled ? "text-2xl" : "text-4xl"
+              scrolled ? "text-2xl" : "text-3xl"
             } ${isActiveState ? "text-gray-900" : "text-white"}`}
           >
             Cerium6
@@ -104,7 +104,7 @@ export default function Navbar() {
               <a
                 key={id}
                 href={`#${id}`}
-                className={`relative text-xl font-medium transition ${
+                className={`relative text-lg font-medium transition ${
                   isActiveState
                     ? isActive
                       ? "text-black"
