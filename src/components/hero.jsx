@@ -1,64 +1,136 @@
-// Hero.jsx
+import { useState, useEffect } from "react";
+
 export default function Hero() {
+  const phrases = [
+    "Laboratories",
+    "Lab Operations",
+    "Scientific Workflows",
+    "Sample Analysis",
+    "Research Teams",
+  ];
+
+  const [index, setIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % phrases.length);
+        setFade(true);
+      }, 400);
+    }, 2200);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section
-      id="home"
-      className="relative min-h-screen bg-[#130035] text-white overflow-hidden"
-    >
-      <div className="absolute inset-0  pointer-events-none" />
-      <div className="relative max-w-7xl mx-auto px-10 py-16 sm:px-8 lg:px-12">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="space-y-6 pt-10 lg:pr-8 xl:pr-12">
-           
-            <h1 className="text-3xl font-medium leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
-              <span className="block text-transparent bg-violet-400 bg-clip-text">
-                The Operating Platform for
-              </span>
-              <span className="block mt-2 text-transparent bg-violet-400 bg-clip-text">
-                Commercial Analytical
-              </span>
-              <span className="block mt-2 text-transparent bg-violet-400 bg-clip-text">
-                Laboratories
-              </span>
-            </h1>
-            
-          </div>
+    <section className="bg-[#1C1A3A] text-white px-10 lg:px-16 py-28 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        {/* HERO TEXT */}
+        <div className="max-w-4xl">
+          <h1 className="font-display font-semibold tracking-[-0.02em] leading-[1.05] text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
+            <span className="block">The Operating Platform for</span>
 
-          <div className=" sm:p-10"> 
-            <p className="text-base leading-7 text-gray-300 sm:text-lg">
-              From sample intake to final reports, Cerium6 gives analytical laboratories complete control of operations, staff performance, customer relationships, and project delivery.
-            </p>
+            <span className="block mt-2">Commercial Analytical</span>
 
-          </div>
+            <span className="block mt-2">
+               {" "}
+              <span
+                className={`inline-block transition-opacity duration-500 ${
+                  fade ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <span className="gradient-text animate-gradient">
+                  {phrases[index]}
+                </span>
+              </span>
+            </span>
+          </h1>
+
+          {/* SUBTEXT */}
+          <p className="mt-6 text-gray-300 text-lg leading-relaxed max-w-xl">
+            Streamline lab operations, improve collaboration, and accelerate
+            scientific outcomes with an intelligent laboratory management
+            platform built for modern teams.
+          </p>
+
+          {/* CTA */}
+          <button className="mt-8 px-7 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 transition text-white font-medium shadow-lg shadow-indigo-500/30 hover:scale-[1.03]">
+            Book a Demo
+          </button>
         </div>
 
-        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-center shadow-[0_20px_60px_-40px_rgba(0,0,0,0.7)] backdrop-blur-sm">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-lg shadow-orange-500/20">
-              C
+        {/* CARDS */}
+        <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              letter: "C",
+              title: "Compliance",
+              gradient: "from-orange-400 to-pink-500",
+            },
+            {
+              letter: "T",
+              title: "Technology",
+              gradient: "from-sky-400 to-violet-500",
+            },
+            {
+              letter: "S",
+              title: "Scalability",
+              gradient: "from-amber-400 to-orange-500",
+            },
+            {
+              letter: "A",
+              title: "Automation",
+              gradient: "from-slate-400 to-gray-600",
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="group rounded-3xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:bg-white/10"
+            >
+              <div
+                className={`mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r ${item.gradient} text-white shadow-lg`}
+              >
+                {item.letter}
+              </div>
+
+              <p className="text-sm uppercase tracking-[0.3em] text-gray-400 group-hover:text-white transition">
+                {item.title}
+              </p>
             </div>
-            <p className="text-sm uppercase tracking-[0.35em] text-gray-400">Creativity</p>
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-center shadow-[0_20px_60px_-40px_rgba(0,0,0,0.7)] backdrop-blur-sm">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-sky-400 to-violet-500 text-white shadow-lg shadow-sky-500/20">
-              T
-            </div>
-            <p className="text-sm uppercase tracking-[0.35em] text-gray-400">Technology</p>
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-center shadow-[0_20px_60px_-40px_rgba(0,0,0,0.7)] backdrop-blur-sm">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-lg shadow-amber-500/20">
-              S
-            </div>
-            <p className="text-sm uppercase tracking-[0.35em] text-gray-400">Strategy</p>
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-center shadow-[0_20px_60px_-40px_rgba(0,0,0,0.7)] backdrop-blur-sm">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-stone-400 to-slate-600 text-white shadow-lg shadow-stone-500/20">
-              A
-            </div>
-            <p className="text-sm uppercase tracking-[0.35em] text-gray-400">Agile</p>
-          </div>
+          ))}
         </div>
       </div>
+
+      {/* GRADIENT TEXT STYLES */}
+      <style jsx>{`
+        .gradient-text {
+          background: linear-gradient(
+            90deg,
+            #facc15,
+            #ec4899,
+            #8b5cf6,
+            #f97316
+          );
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .animate-gradient {
+          animation: gradientMove 4s linear infinite;
+        }
+
+        @keyframes gradientMove {
+          0% {
+            background-position: 0% center;
+          }
+          100% {
+            background-position: 200% center;
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -58,21 +58,19 @@ const Contact = () => {
       {/* Background glow */}
       <div className="absolute top-10 right-10 w-40 h-40 bg-purple-600/20 blur-3xl rounded-full" />
 
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
-        
-        {/* LEFT */}
+      <div className="max-w-6xl mx-auto grid gap-10 items-start md:grid-cols-2">
         <div className="space-y-6">
-          <h2 className="text-4xl md:text-5xl font-semibold">
+          <h2 className="text-4xl sm:text-5xl font-semibold">
             <span className="bg-white text-transparent bg-clip-text">
               Let's Talk
             </span>
           </h2>
 
-          <p className="text-gray-400 text-sm leading-relaxed max-w-md">
+          <p className="max-w-xl text-base sm:text-lg text-gray-400 leading-7 sm:leading-8">
             Have a project in mind? Reach out and we’ll get back within 24 hours.
           </p>
 
-          <div className="space-y-4 text-sm">
+          <div className="space-y-4 text-base sm:text-lg">
             <p>
               <span className="text-gray-500">Email:</span>{" "}
               <a href="mailto:hello@cerium6.com" className="hover:text-white">
@@ -88,11 +86,10 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* RIGHT - FORM */}
-        <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
+        <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6 sm:p-8">
           {response && (
             <div
-              className={`mb-4 p-3 rounded-md text-sm ${
+              className={`mb-4 rounded-md p-3 text-sm ${
                 response.type === "success"
                   ? "bg-green-500/20 text-green-300"
                   : "bg-red-500/20 text-red-300"
@@ -103,7 +100,6 @@ const Contact = () => {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            
             <input
               type="text"
               name="firstName"
@@ -112,7 +108,7 @@ const Contact = () => {
               onChange={handleChange}
               required
               disabled={loading}
-              className="w-full px-4 py-2.5 rounded-md bg-black/40 border border-white/10 text-sm focus:ring-2 focus:ring-purple-500 outline-none"
+              className="w-full rounded-md border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500"
             />
 
             <input
@@ -123,24 +119,24 @@ const Contact = () => {
               onChange={handleChange}
               required
               disabled={loading}
-              className="w-full px-4 py-2.5 rounded-md bg-black/40 border border-white/10 text-sm focus:ring-2 focus:ring-purple-500 outline-none"
+              className="w-full rounded-md border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500"
             />
 
             <textarea
               name="message"
-              rows="3"
+              rows="4"
               placeholder="Your message..."
               value={formData.message}
               onChange={handleChange}
               required
               disabled={loading}
-              className="w-full px-4 py-2.5 rounded-md bg-black/40 border border-white/10 text-sm focus:ring-2 focus:ring-purple-500 outline-none resize-none"
+              className="w-full resize-none rounded-md border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500"
             />
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2.5 rounded-md bg-red-800 text-sm font-medium hover:opacity-90 transition"
+              className="w-full rounded-md bg-red-800 px-4 py-3 text-sm font-medium text-white transition hover:opacity-90"
             >
               {loading ? "Sending..." : "Send Message"}
             </button>

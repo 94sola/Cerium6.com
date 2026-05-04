@@ -1,23 +1,24 @@
-import { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion";
-import logo from "../assets/images/logos.png";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import logo from "../assets/images/labwox..png";
 
 const navItems = [
   { id: "about", label: "About Us" },
   { id: "features", label: "Features" },
-  { id: "faq", label: "FAQ" },
+  { id: "who", label: "Why Choose Us" },
   { id: "contact", label: "Contact Us" },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
-  const navRefs = useRef({});
+  const [hovered, setHovered] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Scroll detection
+  // Scroll + active section
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 40);
 
       let current = "";
       navItems.forEach(({ id }) => {
@@ -44,67 +45,143 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isActiveState = hovered || mobileOpen || scrolled;
+
   return (
-    <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[65%] max-w-5xl">
+    <header
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="fixed top-0 left-0 w-full z-50 transition-all duration-500"
+    >
+      {/* BACKGROUND LAYER */}
       <div
-        className={`relative flex items-center justify-between pl-6 py-0 rounded-md border transition-all duration-300
-        ${
-          scrolled
-            ? "bg-[#130035] backdrop-blur-xl border-white/10 shadow-lg shadow-black/30"
-            : "bg-[#130035] backdrop-blur-md border-white/10"
+        className={`absolute inset-0 transition-all duration-500 ${
+          isActiveState
+            ? "bg-white/90 backdrop-blur-xl shadow-lg"
+            : "bg-transparent"
+        }`}
+      />
+
+      {/* CONTENT */}
+      <div
+        className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between transition-all duration-500 ${
+          scrolled ? "py-3" : "py-6"
         }`}
       >
-        {/* Logo */}
-        <div className="flex items-center">
+        {/* LOGO (SCALES SMOOTHLY) */}
+        <div className="flex items-center gap-3">
           <img
             src={logo}
-            alt="Cerium6 Logo"
-            className="h-5 w-auto sm:h-7 md:h-8"
+            alt="logo"
+            className={`transition-all duration-500 ${
+              scrolled ? "h-12" : "h-14"
+            }`}
           />
+          <div className="leading-tight">
+            <p
+              className={`font-display font-semibold tracking-wide transition-all duration-300 ${
+              scrolled ? "text-2xl" : "text-4xl"
+            } ${isActiveState ? "text-gray-900" : "text-white"}`}
+          >
+            Cerium6
+            </p>
+            <span
+              className={`text-lg pl-6 ${
+                isActiveState ? "text-gray-500" : "text-gray-300"
+              }`}
+            >
+              by Labwox
+            </span>
+          </div>
         </div>
 
-        {/* Nav Links */}
-        <div className="relative hidden md:flex items-center gap-8 text-xs font-normal">
+        {/* DESKTOP NAV */}
+        <nav className="hidden md:flex items-center gap-10">
           {navItems.map(({ id, label }) => {
             const isActive = active === id;
 
             return (
-              <div key={id} className="relative">
+              <a
+                key={id}
+                href={`#${id}`}
+                className={`relative text-xl font-medium transition ${
+                  isActiveState
+                    ? isActive
+                      ? "text-black"
+                      : "text-gray-600 hover:text-black"
+                    : isActive
+                    ? "text-white"
+                    : "text-gray-300 hover:text-white"
+                }`}
+              >
+                {label}
+
+                {isActive && (
+                  <motion.span
+                    layoutId="nav-indicator"
+                    className={`absolute left-0 -bottom-1 h-[2px] w-full rounded-full ${
+                      isActiveState ? "bg-black" : "bg-white"
+                    }`}
+                  />
+                )}
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* RIGHT */}
+        <div className="flex items-center gap-4">
+          <a
+            href="#contact"
+            className="px-5 sm:px-6 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white text-sm sm:text-base font-medium transition-all duration-300 hover:scale-[1.04] shadow-md"
+          >
+            Book Demo
+          </a>
+
+          {/* MOBILE BUTTON */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className={`md:hidden text-2xl transition ${
+              isActiveState ? "text-black" : "text-white"
+            }`}
+          >
+            ☰
+          </button>
+        </div>
+      </div>
+
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-white px-6 pb-6 shadow-lg"
+          >
+            <div className="flex flex-col gap-5 mt-4 text-base">
+              {navItems.map(({ id, label }) => (
                 <a
+                  key={id}
                   href={`#${id}`}
-                  ref={(el) => (navRefs.current[id] = el)}
-                  className={`transition ${
-                    isActive
-                      ? "text-white"
-                      : "text-gray-400 hover:text-white"
-                  }`}
+                  onClick={() => setMobileOpen(false)}
+                  className="text-gray-700 font-medium"
                 >
                   {label}
                 </a>
+              ))}
 
-                {/* Animated underline */}
-                {isActive && (
-                  <motion.div
-                    layoutId="nav-indicator"
-                    className="absolute left-0 -bottom-1 h-[2px] w-full bg-red-800 rounded-full"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  />
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* CTA */}
-        <a
-          href="https://your-app-link.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-violet-900 text-white px-3 py-1 rounded-sm text-sm font-medium hover:opacity-90 transition"
-        >
-          Book Demo
-        </a>
-      </div>
-    </div>
+              <a
+                href="#contact"
+                className="mt-3 px-5 py-3 rounded-xl bg-indigo-500 text-white text-center"
+              >
+                Book Demo
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }

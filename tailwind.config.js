@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      
+      fontFamily: {
+        sans: ["Manrope", "sans-serif"],
+        display: ["Red Hat Display", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 }

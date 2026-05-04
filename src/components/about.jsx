@@ -2,9 +2,8 @@ import { motion } from "framer-motion";
 
 const About = () => {
   return (
-    <section className="bg-[#130035] text-white px-6 py-16 md:px-12 lg:px-24">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
-        {/* Left Text Section */}
+    <section className="bg-[#130035] text-white px-6 py-16 sm:px-8 md:px-12 lg:px-20">
+      <div className="max-w-4xl mx-auto flex flex-col gap-8 md:flex-row md:items-start">
         <motion.div
           className="flex-1"
           initial={{ opacity: 0, x: -50 }}
@@ -12,57 +11,12 @@ const About = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            We are liquis
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
+            About Cerium6
           </h1>
-          <p className="text-gray-300 text-lg leading-relaxed">
-            Founded by two siblings who left corporate careers to build something
-            more fulfilling, liquis is rooted in family and guided by our values.
-            We chose to stay small and lean—prioritizing creativity, empathy, and
-            personal connection over scale. That spirit defines how we work: with
-            each other, with our team, and with our clients.
+          <p className="max-w-3xl text-base sm:text-lg text-gray-300 leading-7 sm:leading-8">
+            Cerium6 is a laboratory operations platform developed by Labwox, a laboratory consulting and scientific solutions company with practical experience in analytical laboratory operations. The platform helps commercial laboratories streamline sample management, reporting, analyst competency tracking, project coordination, and laboratory documentation through a centralized digital system.
           </p>
-        </motion.div>
-
-        {/* Right Values Section */}
-        <motion.div
-          className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6"
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <div className="bg-neutral-950 border border-gray-700 rounded-lg p-6 hover:shadow-lg hover:shadow-purple-500/30 transition">
-            <h3 className="text-red-800 text-xl font-semibold mb-2">
-              Authenticity
-            </h3>
-            <p className="text-gray-400">Be true to who we are and what we do</p>
-          </div>
-
-          <div className="bg-neutral-950 border border-gray-700 rounded-lg p-6 hover:shadow-lg hover:shadow-purple-500/30 transition">
-            <h3 className="text-red-800 text-xl font-semibold mb-2">
-              Vision & Mission
-            </h3>
-            <p className="text-gray-400">
-              Driving purpose with clarity and long-term goals
-            </p>
-          </div>
-
-          <div className="bg-neutral-950 border border-gray-700 rounded-lg p-6 hover:shadow-lg hover:shadow-purple-500/30 transition">
-            <h3 className="text-red-800 text-xl font-semibold mb-2">
-              Expertise
-            </h3>
-            <p className="text-gray-400">Right person for the right job</p>
-          </div>
-
-          <div className="bg-neutral-950 border border-gray-700 rounded-lg p-6 hover:shadow-lg hover:shadow-purple-500/30 transition">
-            <h3 className="text-red-800 text-xl font-semibold mb-2">
-              Aim & Goal
-            </h3>
-            <p className="text-gray-400">
-              Focused objectives to achieve meaningful impact
-            </p>
-          </div>
         </motion.div>
       </div>
     </section>

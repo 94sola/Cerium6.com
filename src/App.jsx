@@ -3,7 +3,7 @@ import Hero from "./components/hero";
 import Features from "./components/features";
 import About from "./components/about";
 import Who from "./components/whoweare";
-import Faq from "./components/faq";
+//import Faq from "./components/faq";
 import Contact from "./components/contact";
 
 function App() {
@@ -28,9 +28,7 @@ function App() {
         <Who />
       </section>
 
-      <section id="faq">
-        <Faq />
-      </section>
+      
 
       <section id="contact">
         <Contact />

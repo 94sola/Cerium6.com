@@ -3,39 +3,48 @@ import analyst from "../assets/images/Analyst prof.png";
 import reporting from "../assets/images/Reporting.png";
 import sample from "../assets/images/Sample Management.png";
 import method from "../assets/images/method.png";
+import document from "../assets/images/Documents.png";
 import project from "../assets/images/Project Tracking.png";
 
 const products = [
   {
     title: "Analyst Proficiency",
     description:
-      "Manage analyst competency, assign workflows, and track training in real time.",
+      "Cerium6 helps laboratories manage analyst competency by assigning methods, parameters, and workflows to qualified personnel while tracking training status and proficiency in real time.",
     image: analyst,
   },
   {
-    title: "Reporting",
+    title: "Reporting and PDF Generation",
     description:
-      "Standardized reporting and documentation with structured workflows.",
+      "Create professional, consistent, and traceable reports for    analytical testing, analyst proficiency, method development, and other laboratory activities from a centralized reporting system.",
     image: reporting,
   },
   {
     title: "Sample Management",
     description:
-      "Log, organize, and track samples across projects and departments.",
+      "Cerium6 enables laboratories to log, organize, and monitor samples across departments, projects, and analytical workflows with complete operational visibility.",
     image: sample,
   },
   {
     title: "Project Tracking",
     description:
-      "Structured tracking tailored for lab operations.",
+      "Organize laboratory activities with structured project management designed for commercial analytical operations.",
     image: project,
   },
   {
     title: "Method Development",
     description:
-      "Track experiments, compare results, and store validation data.",
+      "Log method development activities, record experimental conditions and observations, compare outcomes, and store supporting files such as chromatograms, validation data, calculations, and instrument outputs for future reference.",
     image: method,
   },
+
+  {
+    title: "Documentation",
+    description:
+      "Cerium6 provides a centralized document management system for organizing, storing, and retrieving laboratory operational records across analytical operations and quality processes.",
+    image: document,
+  },
+
 ];
 
 const Products = () => {
