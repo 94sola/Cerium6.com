@@ -1,31 +1,6 @@
-import { useState, useEffect } from "react";
-
 export default function Hero() {
-  const phrases = [
-    "Laboratories",
-    "Lab Operations",
-    "Scientific Workflows",
-    "Sample Analysis",
-    "Research Teams",
-  ];
-
-  const [index, setIndex] = useState(0);
-  const [fade, setFade] = useState(true);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFade(false);
-      setTimeout(() => {
-        setIndex((prev) => (prev + 1) % phrases.length);
-        setFade(true);
-      }, 400);
-    }, 2200);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section className="bg-[#1C1A3A] text-white px-10 lg:px-16 py-28 overflow-hidden">
+    <section className="bg-black text-white px-10 lg:px-16 py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* HERO TEXT */}
         <div className="max-w-4xl">
@@ -35,15 +10,8 @@ export default function Hero() {
             <span className="block mt-2">Commercial Analytical</span>
 
             <span className="block mt-2">
-               {" "}
-              <span
-                className={`inline-block transition-opacity duration-500 ${
-                  fade ? "opacity-100" : "opacity-0"
-                }`}
-              >
-                <span className="gradient-text animate-gradient">
-                  {phrases[index]}
-                </span>
+              <span className="gradient-text animate-gradient">
+                Laboratories
               </span>
             </span>
           </h1>

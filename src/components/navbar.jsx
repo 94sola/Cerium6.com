@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "../assets/images/labwox..png";
+import logoDark from "../assets/images/logo2.png"; // for white bg
+import logoLight from "../assets/images/logo1.png"; // for transparent bg
 
 const navItems = [
   { id: "about", label: "About Us" },
@@ -15,7 +16,6 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Scroll + active section
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
@@ -45,15 +45,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // ✅ critical fix: include mobileOpen
   const isActiveState = hovered || mobileOpen || scrolled;
 
   return (
     <header
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="fixed top-0 left-0 w-full z-50 transition-all duration-500"
+      className="fixed top-0 left-0 w-full z-50"
     >
-      {/* BACKGROUND LAYER */}
+      {/* BACKGROUND */}
       <div
         className={`absolute inset-0 transition-all duration-500 ${
           isActiveState
@@ -62,41 +63,23 @@ export default function Navbar() {
         }`}
       />
 
-      {/* CONTENT */}
+      {/* NAVBAR CONTENT */}
       <div
         className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between transition-all duration-500 ${
-          scrolled ? "py-3" : "py-6"
+          scrolled ? "py-3" : "py-5"
         }`}
       >
-        {/* LOGO (SCALES SMOOTHLY) */}
-        <div className="flex items-center gap-3">
-          <img
-            src={logo}
-            alt="logo"
-            className={`transition-all duration-500 ${
-              scrolled ? "h-12" : "h-14"
-            }`}
-          />
-          <div className="leading-tight">
-            <p
-              className={`font-display font-semibold tracking-wide transition-all duration-300 ${
-              scrolled ? "text-2xl" : "text-3xl"
-            } ${isActiveState ? "text-gray-900" : "text-white"}`}
-          >
-            Cerium6
-            </p>
-            <span
-              className={`text-lg pl-6 ${
-                isActiveState ? "text-gray-500" : "text-gray-300"
-              }`}
-            >
-              by Labwox
-            </span>
-          </div>
-        </div>
+        {/* LOGO (AUTO SWITCH) */}
+        <img
+          src={isActiveState ? logoDark : logoLight}
+          alt="logo"
+          className={`transition-all duration-500 ${
+            scrolled ? "h-12 sm:h-14" : "h-14 sm:h-16"
+          }`}
+        />
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden md:flex items-center gap-8 lg:gap-10">
           {navItems.map(({ id, label }) => {
             const isActive = active === id;
 
@@ -104,7 +87,7 @@ export default function Navbar() {
               <a
                 key={id}
                 href={`#${id}`}
-                className={`relative text-lg font-medium transition ${
+                className={`relative text-sm lg:text-base font-medium transition ${
                   isActiveState
                     ? isActive
                       ? "text-black"
@@ -119,7 +102,7 @@ export default function Navbar() {
                 {isActive && (
                   <motion.span
                     layoutId="nav-indicator"
-                    className={`absolute left-0 -bottom-1 h-[2px] w-full rounded-full ${
+                    className={`absolute left-0 -bottom-1 h-[2px] w-full ${
                       isActiveState ? "bg-black" : "bg-white"
                     }`}
                   />
@@ -130,56 +113,86 @@ export default function Navbar() {
         </nav>
 
         {/* RIGHT */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          {/* ❌ hidden on mobile */}
           <a
             href="#contact"
-            className="px-5 sm:px-6 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white text-sm sm:text-base font-medium transition-all duration-300 hover:scale-[1.04] shadow-md"
+            className="hidden md:inline-flex px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium transition-all duration-300 hover:scale-[1.04] shadow-md"
           >
             Book Demo
           </a>
 
-          {/* MOBILE BUTTON */}
+          {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`md:hidden text-2xl transition ${
+            className={`md:hidden text-2xl ${
               isActiveState ? "text-black" : "text-white"
             }`}
           >
-            ☰
+            {mobileOpen ? "✕" : "☰"}
           </button>
         </div>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* ✅ SLIDE-IN MOBILE MENU */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-white px-6 pb-6 shadow-lg"
-          >
-            <div className="flex flex-col gap-5 mt-4 text-base">
-              {navItems.map(({ id, label }) => (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-gray-700 font-medium"
-                >
-                  {label}
-                </a>
-              ))}
+          <>
+            {/* OVERLAY */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileOpen(false)}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+            />
 
-              <a
-                href="#contact"
-                className="mt-3 px-5 py-3 rounded-xl bg-indigo-500 text-white text-center"
-              >
-                Book Demo
-              </a>
-            </div>
-          </motion.div>
+            {/* DRAWER */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.3 }}
+              className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white z-50 shadow-2xl flex flex-col"
+            >
+              {/* HEADER */}
+              <div className="flex items-center justify-between px-6 py-5 border-b">
+                <span className="font-semibold text-lg text-gray-900">
+                  Menu
+                </span>
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="text-2xl text-gray-700"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* LINKS */}
+              <div className="flex flex-col px-6 py-6 divide-y">
+                {navItems.map(({ id, label }) => (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    onClick={() => setMobileOpen(false)}
+                    className="py-4 text-base font-medium text-gray-800 hover:text-indigo-600 transition"
+                  >
+                    {label}
+                  </a>
+                ))}
+              </div>
+
+              {/* CTA */}
+              <div className="mt-auto p-6">
+                <a
+                  href="#contact"
+                  className="block w-full text-center px-5 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-medium transition"
+                >
+                  Book Demo
+                </a>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

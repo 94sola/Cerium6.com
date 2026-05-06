@@ -16,7 +16,7 @@ const products = [
   {
     title: "Reporting and PDF Generation",
     description:
-      "Create professional, consistent, and traceable reports for    analytical testing, analyst proficiency, method development, and other laboratory activities from a centralized reporting system.",
+      "Create professional, consistent, and traceable reports for analytical testing, analyst proficiency, method development, and other laboratory activities from a centralized reporting system.",
     image: reporting,
   },
   {
@@ -37,14 +37,12 @@ const products = [
       "Log method development activities, record experimental conditions and observations, compare outcomes, and store supporting files such as chromatograms, validation data, calculations, and instrument outputs for future reference.",
     image: method,
   },
-
   {
     title: "Documentation",
     description:
       "Cerium6 provides a centralized document management system for organizing, storing, and retrieving laboratory operational records across analytical operations and quality processes.",
     image: document,
   },
-
 ];
 
 const Products = () => {
@@ -54,7 +52,6 @@ const Products = () => {
       className="bg-[#130035] text-white px-4 sm:px-6 md:px-10 lg:px-20 py-16 sm:py-20 lg:py-24"
     >
       <div className="max-w-7xl mx-auto">
-        
         {/* Heading */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-10 sm:mb-14 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
           Products
@@ -67,23 +64,25 @@ const Products = () => {
           ))}
         </div>
 
-        {/* DESKTOP */}
-        <div className="hidden lg:block space-y-8">
-          
-          {/* Top 3 */}
-          <div className="grid lg:grid-cols-3 gap-8">
-            {products.slice(0, 3).map((product, index) => (
+        {/* DESKTOP → 2 / 2 / 2 */}
+        <div className="hidden lg:flex flex-col gap-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            {products.slice(0, 2).map((product, index) => (
               <Card key={index} product={product} index={index} />
             ))}
           </div>
 
-          {/* Bottom 2 */}
           <div className="grid lg:grid-cols-2 gap-8">
-            {products.slice(3, 5).map((product, index) => (
-              <Card key={index + 3} product={product} index={index + 3} />
+            {products.slice(2, 4).map((product, index) => (
+              <Card key={index + 2} product={product} index={index + 2} />
             ))}
           </div>
 
+          <div className="grid lg:grid-cols-2 gap-8">
+            {products.slice(4, 6).map((product, index) => (
+              <Card key={index + 4} product={product} index={index + 4} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -92,15 +91,13 @@ const Products = () => {
 
 export default Products;
 
-
-
 // ===== CARD COMPONENT =====
 const Card = ({ product, index }) => {
   const isBottom = index >= 3;
 
   return (
     <motion.div
-      className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-5 sm:p-6 md:p-7 overflow-hidden h-[260px] sm:h-[280px] md:h-[300px] flex flex-col justify-between group"
+      className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-6 sm:p-7 md:p-8 overflow-hidden h-[330px] sm:h-[360px] md:h-[390px] flex flex-col justify-between group"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -108,8 +105,8 @@ const Card = ({ product, index }) => {
       whileHover={{ y: -6 }}
     >
       {/* TEXT */}
-      <div className="z-10 max-w-[80%]">
-        <h3 className="text-lg sm:text-xl font-medium mb-2 sm:mb-3">
+      <div className="z-10 max-w-[70%] pr-4">
+        <h3 className="text-lg sm:text-xl font-medium mb-3">
           {product.title}
         </h3>
         <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
@@ -117,27 +114,22 @@ const Card = ({ product, index }) => {
         </p>
       </div>
 
-      {/* IMAGE (FIXED POSITION 🔥) */}
+      {/* IMAGE */}
       <div
         className={`
           absolute
-          ${isBottom ? "left-[-15px] sm:left-[-20px]" : "right-[-15px] sm:right-[-20px]"}
-          
-          bottom-[-10px] sm:bottom-[-5px] md:bottom-[0px]   /* moved UP */
-          
-          w-[85%] sm:w-[75%] md:w-[70%]
-          
+          ${isBottom ? "left-[-10px]" : "right-[-10px]"}
+          bottom-0
+          w-[70%]
           ${isBottom ? "rotate-[6deg]" : "rotate-[-6deg]"}
-          
           transition-transform duration-500 
           group-hover:scale-105
-          ${isBottom ? "group-hover:rotate-[3deg]" : "group-hover:rotate-[-3deg]"}
         `}
       >
         <img
           src={product.image}
           alt={product.title}
-          className="w-full object-contain opacity-95 pointer-events-none select-none"
+          className="w-full object-contain opacity-90 pointer-events-none select-none"
         />
       </div>
 
