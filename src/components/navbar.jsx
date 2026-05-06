@@ -74,7 +74,7 @@ export default function Navbar() {
           src={isActiveState ? logoDark : logoLight}
           alt="logo"
           className={`transition-all duration-500 ${
-            scrolled ? "h-12 sm:h-14" : "h-14 sm:h-16"
+            scrolled ? "h-10 sm:h-12" : "h-10 sm:h-12"
           }`}
         />
 
