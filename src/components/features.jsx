@@ -49,11 +49,11 @@ const Products = () => {
   return (
     <section
       id="features"
-      className="bg-[#130035] text-white px-4 sm:px-6 md:px-10 lg:px-20 py-16 sm:py-20 lg:py-24"
+      className="bg-black text-white px-4 sm:px-6 md:px-10 lg:px-20 py-16 sm:py-20 lg:py-24"
     >
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-10 sm:mb-14 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-10 sm:mb-14 text-white">
           Products
         </h2>
 
@@ -97,7 +97,7 @@ const Card = ({ product, index }) => {
 
   return (
     <motion.div
-      className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-6 sm:p-7 md:p-8 overflow-hidden h-[330px] sm:h-[360px] md:h-[390px] flex flex-col justify-between group"
+      className="relative rounded-2xl border border-white/10 bg-gradient-to-r from-purple-900/10 to-red-900-500/10 p-6 sm:p-7 md:p-8 overflow-hidden h-[330px] sm:h-[360px] md:h-[390px] flex flex-col justify-between group"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -105,11 +105,11 @@ const Card = ({ product, index }) => {
       whileHover={{ y: -6 }}
     >
       {/* TEXT */}
-      <div className="z-10 max-w-[70%] pr-4">
-        <h3 className="text-lg sm:text-xl font-medium mb-3">
+      <div className="z-10 max-w-[80%] pr-4">
+        <h3 className="text-xl sm:text-2xl font-medium mb-3">
           {product.title}
         </h3>
-        <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+        <p className="text-gray-200 text-xs pb-6 sm:text-sm leading-relaxed">
           {product.description}
         </p>
       </div>
@@ -134,7 +134,7 @@ const Card = ({ product, index }) => {
       </div>
 
       {/* HOVER GLOW */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 bg-gradient-to-r from-purple-500/10 to-pink-500/10" />
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 bg-gradient-to-r from-purple-900/10 to-red-900-500/10" />
     </motion.div>
   );
 };

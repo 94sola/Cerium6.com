@@ -1,6 +1,6 @@
 const BusinessValues = () => {
   return (
-    <section className="bg-[#130035] w-full px-6 py-12 sm:px-8 sm:py-16 lg:px-16">
+    <section className="bg-black w-full px-6 py-12 sm:px-8 sm:py-16 lg:px-16">
       <div className="max-w-6xl mx-auto grid gap-4 sm:grid-cols-2">
         <div className="flex items-start gap-3 rounded-3xl border border-white/10 bg-white/5 p-5 sm:p-6">
           <span className="mt-1 h-4 w-4 rounded-full bg-orange-500"></span>

@@ -58,7 +58,7 @@ export default function Navbar() {
       <div
         className={`absolute inset-0 transition-all duration-500 ${
           isActiveState
-            ? "bg-white/90 backdrop-blur-xl shadow-lg"
+            ? "bg-white/90 backdrop-blur-xl shadow-sm"
             : "bg-transparent"
         }`}
       />
@@ -74,7 +74,7 @@ export default function Navbar() {
           src={isActiveState ? logoDark : logoLight}
           alt="logo"
           className={`transition-all duration-500 ${
-            scrolled ? "h-10 sm:h-12" : "h-10 sm:h-12"
+            scrolled ? "h-16 sm:h-20" : "h-16 sm:h-20"
           }`}
         />
 

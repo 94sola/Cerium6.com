@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const About = () => {
   return (
-    <section className="bg-[#130035] text-white px-6 py-16 sm:px-8 md:px-12 lg:px-20">
+    <section className="bg-black text-white px-6 py-16 sm:px-8 md:px-12 lg:px-20">
       <div className="max-w-4xl mx-auto flex flex-col gap-8 md:flex-row md:items-start">
         <motion.div
           className="flex-1"

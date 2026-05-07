@@ -53,7 +53,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative bg-[#130035] text-white px-6 py-16 overflow-hidden"
+      className="relative bg-black text-white px-6 py-16 overflow-hidden"
     >
       {/* Background glow */}
       <div className="absolute top-10 right-10 w-40 h-40 bg-purple-600/20 blur-3xl rounded-full" />
