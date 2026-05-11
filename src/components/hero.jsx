@@ -10,7 +10,7 @@ export default function Hero() {
             <span className="block mt-2">Commercial Analytical</span>
 
             <span className="block mt-2">
-              <span className="gradient-text animate-gradient">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-orange-500 bg-[length:200%_200%] animate-gradient">
                 Laboratories
               </span>
             </span>
@@ -70,35 +70,6 @@ export default function Hero() {
           ))}
         </div>
       </div>
-
-      {/* GRADIENT TEXT STYLES */}
-      <style jsx>{`
-        .gradient-text {
-          background: linear-gradient(
-            90deg,
-            #facc15,
-            #ec4899,
-            #8b5cf6,
-            #f97316
-          );
-          background-size: 200% auto;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .animate-gradient {
-          animation: gradientMove 4s linear infinite;
-        }
-
-        @keyframes gradientMove {
-          0% {
-            background-position: 0% center;
-          }
-          100% {
-            background-position: 200% center;
-          }
-        }
-      `}</style>
     </section>
   );
 }

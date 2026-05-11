@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoDark from "../assets/images/logo2.png"; // for white bg
-import logoLight from "../assets/images/logo1.png"; // for transparent bg
+import { Menu, X } from "lucide-react";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+
+import logo from "../assets/images/logo2.png";
 
 const navItems = [
   { id: "about", label: "About Us" },
@@ -12,17 +18,28 @@ const navItems = [
 
 export default function Navbar() {
   const [active, setActive] = useState("");
-  const [hovered, setHovered] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Detect homepage
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 20);
+
+      // Only detect active section on homepage
+      if (!isHomePage) return;
 
       let current = "";
+
       navItems.forEach(({ id }) => {
         const section = document.getElementById(id);
+
         if (section) {
           const offsetTop = section.offsetTop - 120;
           const height = section.offsetHeight;
@@ -40,13 +57,45 @@ export default function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
+
     handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage]);
 
-  // ✅ critical fix: include mobileOpen
-  const isActiveState = hovered || mobileOpen || scrolled;
+  // HANDLE NAVIGATION
+  const handleNavClick = (id) => {
+    setMobileOpen(false);
+
+    // If user is NOT on homepage
+    if (!isHomePage) {
+      navigate("/");
+
+      // Wait for page to render before scrolling
+      setTimeout(() => {
+        const section = document.getElementById(id);
+
+        if (section) {
+          section.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 100);
+
+      return;
+    }
+
+    // Smooth scroll on homepage
+    const section = document.getElementById(id);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
 
   return (
     <header
@@ -54,87 +103,97 @@ export default function Navbar() {
       onMouseLeave={() => setHovered(false)}
       className="fixed top-0 left-0 w-full z-50"
     >
-      {/* BACKGROUND */}
+      {/* NAVBAR BACKGROUND */}
       <div
-        className={`absolute inset-0 transition-all duration-500 ${
-          isActiveState
-            ? "bg-white/90 backdrop-blur-xl shadow-sm"
-            : "bg-transparent"
+        className={`absolute inset-0 transition-all duration-300 ${
+          hovered || mobileOpen
+            ? "bg-neutral-800"
+            : "bg-black"
+        } ${
+          scrolled
+            ? "shadow-lg backdrop-blur-xl"
+            : ""
         }`}
       />
 
       {/* NAVBAR CONTENT */}
       <div
-        className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between transition-all duration-500 ${
-          scrolled ? "py-3" : "py-5"
+        className={`relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-10 transition-all duration-300 ${
+          scrolled ? "py-3" : "py-4"
         }`}
       >
-        {/* LOGO (AUTO SWITCH) */}
-        <img
-          src={isActiveState ? logoDark : logoLight}
-          alt="logo"
-          className={`transition-all duration-500 ${
-            scrolled ? "h-16 sm:h-20" : "h-16 sm:h-20"
-          }`}
-        />
+        {/* LOGO */}
+        <Link
+          to="/"
+          className="flex items-center flex-shrink-0"
+          onClick={() => setMobileOpen(false)}
+        >
+          <img
+            src={logo}
+            alt="Cerium6 Logo"
+            className="h-14 sm:h-16 lg:h-20 w-auto object-contain transition-all duration-300"
+          />
+        </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-8 lg:gap-10">
+        <nav className="hidden md:flex items-center gap-3 lg:gap-5">
           {navItems.map(({ id, label }) => {
             const isActive = active === id;
 
             return (
-              <a
+              <button
                 key={id}
-                href={`#${id}`}
-                className={`relative text-sm lg:text-base font-medium transition ${
-                  isActiveState
-                    ? isActive
-                      ? "text-black"
-                      : "text-gray-600 hover:text-black"
-                    : isActive
-                    ? "text-white"
-                    : "text-gray-300 hover:text-white"
+                onClick={() => handleNavClick(id)}
+                className={`relative px-4 lg:px-5 py-2.5 rounded-xl text-sm lg:text-base font-medium transition-all duration-300 ${
+                  isActive
+                    ? "bg-neutral-700 text-white"
+                    : "text-gray-200 hover:bg-neutral-700 hover:text-white"
                 }`}
               >
                 {label}
 
                 {isActive && (
                   <motion.span
-                    layoutId="nav-indicator"
-                    className={`absolute left-0 -bottom-1 h-[2px] w-full ${
-                      isActiveState ? "bg-black" : "bg-white"
-                    }`}
+                    layoutId="desktop-active-nav"
+                    className="absolute inset-0 rounded-xl border border-white/10"
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 30,
+                    }}
                   />
                 )}
-              </a>
+              </button>
             );
           })}
         </nav>
 
-        {/* RIGHT */}
+        {/* RIGHT SIDE */}
         <div className="flex items-center gap-3">
-          {/* ❌ hidden on mobile */}
-          <a
-            href="#contact"
-            className="hidden md:inline-flex px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium transition-all duration-300 hover:scale-[1.04] shadow-md"
+          
+          {/* CTA BUTTON */}
+          <button
+            onClick={() => handleNavClick("contact")}
+            className="hidden md:flex items-center justify-center px-5 lg:px-6 py-2.5 rounded-xl bg-red-700 hover:bg-red-800 text-white text-sm font-semibold transition-all duration-300"
           >
             Book Demo
-          </a>
+          </button>
 
           {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`md:hidden text-2xl ${
-              isActiveState ? "text-black" : "text-white"
-            }`}
+            className="md:hidden flex items-center justify-center w-11 h-11 rounded-lg text-white hover:bg-neutral-700 transition-all duration-300"
           >
-            {mobileOpen ? "✕" : "☰"}
+            {mobileOpen ? (
+              <X size={26} />
+            ) : (
+              <Menu size={26} />
+            )}
           </button>
         </div>
       </div>
 
-      {/* ✅ SLIDE-IN MOBILE MENU */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {mobileOpen && (
           <>
@@ -144,52 +203,68 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileOpen(false)}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
             />
 
-            {/* DRAWER */}
+            {/* MOBILE DRAWER */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.3 }}
-              className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white z-50 shadow-2xl flex flex-col"
+              className="fixed top-0 right-0 h-screen w-[85%] sm:w-[70%] max-w-sm bg-black z-50 shadow-2xl flex flex-col"
             >
-              {/* HEADER */}
-              <div className="flex items-center justify-between px-6 py-5 border-b">
-                <span className="font-semibold text-lg text-gray-900">
-                  Menu
-                </span>
+              {/* MOBILE HEADER */}
+              <div className="flex items-center justify-between px-5 py-5 border-b border-white/10">
+                <Link
+                  to="/"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center"
+                >
+                  <img
+                    src={logo}
+                    alt="Logo"
+                    className="h-12 w-auto object-contain"
+                  />
+                </Link>
+
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="text-2xl text-gray-700"
+                  className="flex items-center justify-center w-10 h-10 rounded-lg text-white hover:bg-neutral-700 transition"
                 >
-                  ✕
+                  <X size={24} />
                 </button>
               </div>
 
-              {/* LINKS */}
-              <div className="flex flex-col px-6 py-6 divide-y">
-                {navItems.map(({ id, label }) => (
-                  <a
-                    key={id}
-                    href={`#${id}`}
-                    onClick={() => setMobileOpen(false)}
-                    className="py-4 text-base font-medium text-gray-800 hover:text-indigo-600 transition"
-                  >
-                    {label}
-                  </a>
-                ))}
+              {/* MOBILE LINKS */}
+              <div className="flex flex-col px-5 py-6 gap-2">
+                {navItems.map(({ id, label }) => {
+                  const isActive = active === id;
+
+                  return (
+                    <button
+                      key={id}
+                      onClick={() => handleNavClick(id)}
+                      className={`w-full text-left px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${
+                        isActive
+                          ? "bg-neutral-700 text-white"
+                          : "text-gray-300 hover:bg-neutral-700 hover:text-white"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
               </div>
 
-              {/* CTA */}
-              <div className="mt-auto p-6">
-                <a
-                  href="#contact"
-                  className="block w-full text-center px-5 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-medium transition"
+              {/* MOBILE CTA */}
+              <div className="mt-auto p-5 border-t border-white/10">
+                <button
+                  onClick={() => handleNavClick("contact")}
+                  className="block w-full text-center px-5 py-3 rounded-xl bg-red-700 hover:bg-red-800 text-white font-semibold transition-all duration-300"
                 >
                   Book Demo
-                </a>
+                </button>
               </div>
             </motion.div>
           </>

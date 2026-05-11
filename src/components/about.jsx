@@ -11,11 +11,12 @@ const About = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
-            About Cerium6
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white mb-6">
+            Developed by Labwox for Analytical Laboratories
           </h1>
           <p className="max-w-3xl text-base sm:text-lg text-gray-300 leading-7 sm:leading-8">
-            Cerium6 is a laboratory operations platform developed by Labwox, a laboratory consulting and scientific solutions company with practical experience in analytical laboratory operations. The platform helps commercial laboratories streamline sample management, reporting, analyst competency tracking, project coordination, and laboratory documentation through a centralized digital system.
+            Cerium6 is a laboratory operations platform developed by Labwox, a laboratory 
+            consulting and scientific solutions company with practical experience in analytical laboratory operations.
           </p>
         </motion.div>
       </div>
