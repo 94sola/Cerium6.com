@@ -62,7 +62,7 @@ const Products = () => {
       <div className="max-w-7xl mx-auto">
         {/* HEADING */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-10 sm:mb-14 text-white">
-          Products
+          Features
         </h2>
 
         {/* MOBILE / TABLET */}

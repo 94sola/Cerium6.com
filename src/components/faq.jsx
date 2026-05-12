@@ -51,7 +51,7 @@ const FAQ = () => {
   };
 
   return (
-    <section className="bg-[#130035] text-white w-full px-4 py-12 sm:px-6 sm:py-16 md:px-12 lg:px-24 lg:py-20">
+    <section className="bg-black text-white w-full px-4 py-12 sm:px-6 sm:py-16 md:px-12 lg:px-24 lg:py-20">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-12 sm:mb-16 lg:mb-20">
