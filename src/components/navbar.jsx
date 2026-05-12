@@ -12,7 +12,7 @@ import logo from "../assets/images/logo2.png";
 const navItems = [
   { id: "about", label: "About Us" },
   { id: "features", label: "Features" },
-  { id: "who", label: "Why Choose Us" },
+  { id: "faq", label: "FAQ" },
   { id: "contact", label: "Contact Us" },
 ];
 

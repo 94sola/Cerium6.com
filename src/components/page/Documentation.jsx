@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import document from "../../assets/images/Documents.png";
 
 export default function Documentation() {
+  const [isImageZoomed, setIsImageZoomed] = useState(false);
   const features = [
     "Upload documents in multiple file formats.",
     "Store raw analytical data and technical records securely.",
@@ -35,11 +37,6 @@ export default function Documentation() {
             viewport={{ once: true }}
             className="text-center lg:text-left"
           >
-            {/* LABEL */}
-            <div className="mb-5 inline-flex items-center rounded-full border border-red-700/20 bg-red-700/10 px-4 py-1.5 text-sm font-medium text-red-500">
-              Laboratory Documentation System
-            </div>
-
             {/* HEADING */}
             <h2 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
               Professional
@@ -65,10 +62,6 @@ export default function Documentation() {
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
               <button className="w-full rounded-xl bg-red-700 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-red-700/20 transition-all duration-300 hover:scale-[1.02] hover:bg-red-800 sm:w-auto">
                 Book a Demo
-              </button>
-
-              <button className="w-full rounded-xl border border-white/10 bg-white/5 px-8 py-4 text-base font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10 sm:w-auto">
-                Learn More
               </button>
             </div>
           </motion.div>
@@ -111,9 +104,18 @@ export default function Documentation() {
                 <img
                   src={document}
                   alt="Document Management Dashboard"
-                  className="h-full w-full rounded-2xl object-cover"
+                  className="h-full w-full rounded-2xl object-cover cursor-pointer transition-transform duration-300 hover:scale-105"
+                  onMouseEnter={() => setIsImageZoomed(true)}
+                  onMouseLeave={() => setIsImageZoomed(false)}
                 />
               </div>
+              
+              {/* IMAGE ZOOM OVERLAY */}
+              {isImageZoomed && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 cursor-pointer" onMouseLeave={() => setIsImageZoomed(false)}>
+                  <img src={document} alt="Document Management Dashboard - Zoomed" className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg" />
+                </div>
+              )}
             </div>
           </motion.div>
         </div>

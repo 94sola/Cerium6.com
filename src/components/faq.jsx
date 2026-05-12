@@ -2,44 +2,44 @@ import { useState } from "react";
 
 const faqData = [
   {
-    title: "How long does a typical project take?",
+    title: "How long does it take to implement Cerium6?",
     content:
-      "Project timelines vary based on scope and complexity. Most web design projects take 4-12 weeks, while custom software development typically ranges from 2-6 months. We'll provide a detailed timeline during our initial consultation.",
+      "Implementation timelines depend on your laboratory's size and complexity. Typically, the setup process takes 2-4 weeks including data migration, staff training, and system configuration. We provide dedicated support throughout the implementation to ensure a smooth transition.",
   },
   {
-    title: "What is your pricing model?",
+    title: "What is Cerium6's pricing model?",
     content:
-      "We offer flexible pricing options including fixed-price projects, hourly rates, and retainer packages. Pricing depends on project complexity, timeline, and requirements. Contact us for a personalized quote.",
+      "Cerium6 offers flexible pricing tailored to your laboratory's size and needs. We provide transparent subscription-based pricing with no hidden fees. Contact us for a personalized quote based on your facility's requirements and feature selection.",
   },
   {
     title: "Do you offer ongoing support and maintenance?",
     content:
-      "Yes, we provide comprehensive post-launch support including bug fixes, performance optimization, security updates, and feature enhancements. We offer maintenance retainers tailored to your needs.",
+      "Yes, all Cerium6 subscriptions include comprehensive support including technical assistance, system updates, security patches, and performance optimization. Our support team is available to help with any questions or issues you encounter.",
   },
   {
-    title: "What technologies do you specialize in?",
+    title: "What features does Cerium6 include?",
     content:
-      "We work with modern web technologies including React, Vue, Node.js, and Python. For design, we use Figma and Adobe Creative Suite. We also specialize in Webflow, Wix, and custom WordPress development.",
+      "Cerium6 provides comprehensive laboratory management including sample tracking, project management, analyst proficiency tracking, method development documentation, document management, and automated reporting. All features are designed specifically for commercial analytical laboratories.",
   },
   {
-    title: "Can you help rebrand an existing business?",
+    title: "Can Cerium6 integrate with our existing laboratory systems?",
     content:
-      "Absolutely. We specialize in comprehensive rebranding projects including logo design, brand guidelines, website redesign, and marketing collateral. We'll work with you to maintain your core values while refreshing your image.",
+      "Yes, Cerium6 can integrate with many existing laboratory information management systems (LIMS) and equipment. We work with you to ensure seamless data flow between systems. Contact our team to discuss your specific integration needs.",
   },
   {
-    title: "How do you ensure project quality?",
+    title: "How secure is Cerium6?",
     content:
-      "Quality is at the heart of everything we do. We follow agile methodologies, conduct regular testing, incorporate client feedback throughout development, and perform comprehensive quality assurance before launch.",
+      "Security is a top priority for Cerium6. We implement enterprise-grade encryption, secure authentication, regular security audits, and compliance with industry standards. Your laboratory data is protected with multiple layers of security.",
   },
   {
-    title: "Do you work with startups?",
+    title: "Is Cerium6 suitable for small laboratories?",
     content:
-      "Yes, we love working with startups! We understand budget constraints and offer scalable solutions. We can help with MVP development, brand identity, and go-to-market strategies.",
+      "Absolutely. Cerium6 is designed to scale with your laboratory's growth. Whether you're a small independent lab or a large commercial facility, Cerium6 provides the tools you need without unnecessary complexity or cost.",
   },
   {
-    title: "What is your process for handling revisions?",
+    title: "What training and resources do you provide?",
     content:
-      "We include a set number of revision rounds in our projects. Additional revisions are quoted separately. Our goal is to exceed expectations while maintaining project momentum and timelines.",
+      "We provide comprehensive training including video tutorials, detailed documentation, live training sessions, and dedicated onboarding support. Our team ensures your staff is confident using Cerium6 from day one.",
   },
 ];
 
